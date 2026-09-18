@@ -17,9 +17,9 @@ def skugen(e):
 
     product = product_name[0:3].upper() # Using uppercase
 
-    qty = quantity
+    quvntity = quantity # Getting the numerical value
 
-    generated_sku = f"{categ0ry}-{product}-{qty}" # Getting the generated sku
+    generated_sku = f"{categ0ry}-{product}-{quvntity}" # Getting the generated sku
 
     # display
     document.getElementById("skugen").innerHTML = f"<h2 style='color: #ff71a3; text-align: center; margin-top: 15px;'>Your SKU code is {generated_sku}</h2>"
