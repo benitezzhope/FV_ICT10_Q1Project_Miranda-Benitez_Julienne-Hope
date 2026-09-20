@@ -1,41 +1,25 @@
-# Project
-from pyscript import display, document
+from pyscript import document
 
-def Total(e):
-    document.getElementById("result").innerHTML = ""
-    item1 = document.getElementById("slime1")
-    item2 = document.getElementById("slime2")
-    item3 = document.getElementById("slime3")
-    item4 = document.getElementById("squishy1")
-    item5 = document.getElementById("squishy2")
-    item6 = document.getElementById("squishy3")
+def skugen(e):
+    # Get the values
+    category = document.getElementById("category").value
+    product_name = document.getElementById("product").value
+    quantity = document.getElementById("quantity").value
 
-    # Calculate the subtotal using the selected values
-    subtotal = float(item1.value) * item1.checked
+    # Make sure all the values have been filled up
+    if not category or not product_name or not quantity:
+        document.getElementById("skugen").innerHTML = "<p style='color: #ff71a3; text-align: center; font-weight: bold;'>Please fill out all fields properly.</p>"
+        return
 
-    # Add the current value of the items to the subtotal
-    # .checked adds the selected item only
-    subtotal += float(item2.value) * item2.checked
-    subtotal += float(item3.value) * item3.checked
-    subtotal += float(item4.value) * item4.checked
-    subtotal += float(item5.value) * item5.checked
-    subtotal += float(item6.value) * item6.checked
+    # Getting the elements for the SKU Code by getting the first three letters for each
 
-    # Calculate tax and total
-    tax = subtotal * 0.12
-    total = subtotal + tax
+    categ0ry = category[0:3].upper() # Using uppercase
 
-    # Display receipt
-    display(f"Subtotal: ₱{subtotal:.2f}", target="result")
-    display(f"Tax: ₱{tax:.2f}", target="result")
-    display(f"Total: ₱{total:.2f}", target="result")
+    product = product_name[0:3].upper() # Using uppercase
 
-def Reset(e): #hides the receipt details and unchecks the boxes
-    document.getElementById("slime1").checked = False 
-    document.getElementById("slime2").checked = False
-    document.getElementById("slime3").checked = False
-    document.getElementById("squishy1").checked = False
-    document.getElementById("squishy2").checked = False
-    document.getElementById("squishy3").checked = False
-    
-    document.getElementById("result").innerHTML = ""
+    quvntity = quantity # Getting the numerical value
+
+    generated_sku = f"{categ0ry}-{product}-{quvntity}" # Getting the generated sku
+
+    # display
+    document.getElementById("skugen").innerHTML = f"<h2 style='color: #ff71a3; text-align: center; margin-top: 15px;'>Your SKU code is {generated_sku}</h2>"
